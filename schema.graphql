@@ -17,3 +17,21 @@ type Approval {
   # spender is the account that is approved to spend the tokens
   spender: Account!
 }
+
+type User {
+  id: ID!
+  address: String!
+  positions: [Position!]! @derivedFrom(field: "owner")
+}
+
+type Position {
+  id: ID!
+  owner: Account!
+  collateral: BigInt!
+  entryVolume: BigInt!
+  assets: BigInt!
+  entryTimestamp: BigInt!
+  borrowFeeIntegral: BigInt!
+  fundingFeeIntegral: BigInt!
+  direction: Int!
+}
