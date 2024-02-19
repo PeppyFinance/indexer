@@ -3,9 +3,16 @@ import {
   ERC20Contract_Approval_handler,
   ERC20Contract_Transfer_loader,
   ERC20Contract_Transfer_handler,
+  TradePairContract_PositionOpened_loader,
+  TradePairContract_PositionOpened_handler,
 } from "../generated/src/Handlers.gen";
 
-import { AccountEntity, ApprovalEntity } from "../generated/src/Types.gen";
+import {
+  AccountEntity,
+  ApprovalEntity,
+  PositionEntity,
+  UserEntity,
+} from "../generated/src/Types.gen";
 
 ERC20Contract_Approval_loader(({ event, context }) => {
   // loading the required Account entity
@@ -84,5 +91,41 @@ ERC20Contract_Transfer_handler(({ event, context }) => {
     };
 
     context.Account.set(accountObject);
+  }
+});
+
+TradePairContract_PositionOpened_loader(({ event, context }) => {
+  context.User.load(event.params.owner.toString());
+  context.Position.load(event.params.id.toString(), {});
+});
+
+TradePairContract_PositionOpened_handler(({ event, context }) => {
+  let user = context.User.get(event.params.owner.toString());
+
+  if (user === undefined || user === null) {
+    let userObject: UserEntity = {
+      id: event.params.owner.toString(),
+      address: event.params.owner.toString(),
+    };
+
+    context.User.set(userObject);
+  }
+
+  let position = context.Position.get(event.params.id.toString());
+
+  // event PositionOpened(
+  //     address indexed owner, uint256 id, int256 entryPrice, uint256 collateral, uint256 leverage, int8 direction
+  // );
+
+  if (position === undefined || position === null) {
+    let positionObject: PositionEntity = {
+      id: event.params.id.toString(),
+      owner: event.params.owner.toString(),
+      collateral: event.params.collateral,
+      entryTimestamp: BigInt(event.blockTimestamp),
+      direction: event.params.direction,
+    };
+
+    context.Position.set(positionObject);
   }
 });

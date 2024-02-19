@@ -1,8 +1,10 @@
 name: erc20indexer
 description: ERC-20 indexer
 networks:
-  - id: 1 # Ethereum Mainnet
-    start_block: 10861674
+  - id: 31337
+    start_block: 0
+    rpc_config:
+      url: "http://127.0.0.1:8545"
     contracts:
       - name: ERC20
         address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984" #UNI
@@ -24,3 +26,4 @@ networks:
           - event: PositionOpened
             requiredEntities:
               - name: User
+              - name: Position

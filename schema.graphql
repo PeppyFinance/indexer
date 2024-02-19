@@ -28,10 +28,10 @@ type Position {
   id: ID!
   owner: Account!
   collateral: BigInt!
-  entryVolume: BigInt!
-  assets: BigInt!
+  # entryVolume: BigInt!
+  # assets: BigInt!
   entryTimestamp: BigInt!
-  borrowFeeIntegral: BigInt!
-  fundingFeeIntegral: BigInt!
-  direction: Int!
+  # borrowFeeIntegral: BigInt!
+  # fundingFeeIntegral: BigInt!
+  direction: BigInt!
 }
