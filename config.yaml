@@ -16,3 +16,11 @@ networks:
             requiredEntities:
               - name: "Account"
               - name: "Approval"
+      - name: TradePair
+        address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+        handler: src/EventHandlers.ts
+        abi_file_path: "abi/TradePair.json"
+        events:
+          - event: PositionOpened
+            requiredEntities:
+              - name: User
