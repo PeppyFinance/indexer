@@ -98,7 +98,7 @@ ERC20Contract_Transfer_handler(({ event, context }) => {
 
 TradePairContract_PositionOpened_loader(({ event, context }) => {
   context.User.load(event.params.owner.toString());
-  context.Position.load(event.params.id.toString());
+  context.Position.load(event.params.id.toString(), {});
 });
 
 TradePairContract_PositionOpened_handler(({ event, context }) => {
