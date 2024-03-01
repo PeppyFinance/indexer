@@ -4,7 +4,7 @@ import { PositionEntity } from "../generated/src/Types.gen";
 import { Addresses } from "../generated/src/bindings/Ethers.gen";
 
 describe("Transfers", () => {
-	it("PositionOped creates new Position entity ", () => {
+	it("PositionOped creates new Position and User entity ", () => {
 		const mockDbEmpty = MockDb.createMockDb();
 
 		const userAddress1 = Addresses.mockAddresses[0];
