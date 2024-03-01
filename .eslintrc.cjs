@@ -17,6 +17,5 @@ module.exports = {
   },
   plugins: ["@typescript-eslint"],
   rules: {},
-  ignorePatters: ["generated/**/*"],
   root: true,
 };
