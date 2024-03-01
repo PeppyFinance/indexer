@@ -10,20 +10,20 @@ describe("Transfers", () => {
 		const userAddress1 = Addresses.mockAddresses[0];
 
 		const mockPositionEntity: PositionEntity = {
-			id: 123,
+			id: "123",
 			owner: userAddress1,
 			collateral: 100_000n,
 			entryTimestamp: 2n,
-			direction: 1,
+			direction: 1n,
 		};
 
 		const mockPositionOpened = TradePair.PositionOpened.createMockEvent({
 			owner: userAddress1,
-			id: 123,
+			id: 123n,
 			entryPrice: 1_000n,
 			collateral: 100_000n,
-			leverage: 1n,
-			direction: 1,
+			volume: 500_000n,
+			direction: 1n,
 			mockEventData: {
 				blockNumber: 1,
 				blockTimestamp: 2,
@@ -41,12 +41,12 @@ describe("Transfers", () => {
 			mockDb: mockDbEmpty,
 		});
 
-		const position1 = mockDbAfterPositionOpened.entities.Position.get(123);
+		const position1 = mockDbAfterPositionOpened.entities.Position.get("123");
 
 		const user1 = mockDbAfterPositionOpened.entities.User.get(userAddress1);
 
 		assert.deepEqual(position1, mockPositionEntity, "Should be equal");
-		assert.equal(user1.address, userAddress1, "user.address");
-		assert.equal(user1.id, userAddress1, "user.id");
+		assert.equal(user1?.address, userAddress1, "user.address");
+		assert.equal(user1?.id, userAddress1, "user.id");
 	});
 });
