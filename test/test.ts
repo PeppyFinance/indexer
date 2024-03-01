@@ -43,6 +43,10 @@ describe("Transfers", () => {
 
 		const position1 = mockDbAfterPositionOpened.entities.Position.get(123);
 
+		const user1 = mockDbAfterPositionOpened.entities.User.get(userAddress1);
+
 		assert.deepEqual(position1, mockPositionEntity, "Should be equal");
+		assert.equal(user1.address, userAddress1, "user.address");
+		assert.equal(user1.id, userAddress1, "user.id");
 	});
 });
