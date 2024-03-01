@@ -119,6 +119,12 @@
       {
         "indexed": false,
         "internalType": "int256",
+        "name": "closePrice",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
         "name": "borrowFeeAmount",
         "type": "int256"
       },
@@ -198,9 +204,27 @@
       },
       {
         "indexed": false,
+        "internalType": "int256",
+        "name": "assets",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
         "internalType": "int8",
         "name": "direction",
         "type": "int8"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "borrowFeeIntegral",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "fundingFeeIntegral",
+        "type": "int256"
       }
     ],
     "name": "PositionOpened",

@@ -27,11 +27,20 @@ type User {
 type Position {
   id: ID!
   owner: Account!
+  isOpen: Boolean!
   collateral: BigInt!
-  # entryVolume: BigInt!
-  # assets: BigInt!
+  entryVolume: BigInt!
+  assets: BigInt!
   entryTimestamp: BigInt!
-  # borrowFeeIntegral: BigInt!
-  # fundingFeeIntegral: BigInt!
+  entryPrice: BigInt!
+  borrowFeeIntegral: BigInt!
+  fundingFeeIntegral: BigInt!
   direction: BigInt!
+  closePrice: BigInt
+  closeTimestamp: BigInt
+  closeValue: BigInt
+  pnl: BigInt
+  borrowFeeAmount: BigInt
+  fundingFeeAmount: BigInt
+  totalPnL: BigInt
 }
