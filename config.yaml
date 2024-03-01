@@ -15,3 +15,7 @@ networks:
             requiredEntities:
               - name: User
               - name: Position
+          - event: PositionClosed
+            requiredEntities:
+              - name: User
+              - name: Position
