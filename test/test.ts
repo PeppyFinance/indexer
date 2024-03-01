@@ -1,63 +1,48 @@
 import assert from "assert";
-import { MockDb, ERC20 } from "../generated/src/TestHelpers.gen";
-import { AccountEntity } from "../generated/src/Types.gen";
+import { MockDb, TradePair } from "../generated/src/TestHelpers.gen";
+import { PositionEntity } from "../generated/src/Types.gen";
 import { Addresses } from "../generated/src/bindings/Ethers.gen";
 
 describe("Transfers", () => {
-  it("Transfer subtracts the from account balance and adds to the to account balance", () => {
-    //Instantiate a mock DB
-    const mockDbEmpty = MockDb.createMockDb();
+	it("PositionOped creates new Position entity ", () => {
+		const mockDbEmpty = MockDb.createMockDb();
 
-    //Get mock addresses from helpers
-    const userAddress1 = Addresses.mockAddresses[0];
-    const userAddress2 = Addresses.mockAddresses[1];
+		const userAddress1 = Addresses.mockAddresses[0];
 
-    //Make a mock entity to set the initial state of the mock db
-    const mockAccountEntity: AccountEntity = {
-      id: userAddress1,
-      balance: 5n,
-    };
+		const mockPositionEntity: PositionEntity = {
+			id: 123,
+			owner: userAddress1,
+			collateral: 100_000n,
+			entryTimestamp: 2n,
+			direction: 1,
+		};
 
-    //Set an initial state for the user
-    //Note: set and delete functions do not mutate the mockDb, they return a new
-    //mockDb with with modified state
-    const mockDb = mockDbEmpty.entities.Account.set(mockAccountEntity);
+		const mockPositionOpened = TradePair.PositionOpened.createMockEvent({
+			owner: userAddress1,
+			id: 123,
+			entryPrice: 1_000n,
+			collateral: 100_000n,
+			leverage: 1n,
+			direction: 1,
+			mockEventData: {
+				blockNumber: 1,
+				blockTimestamp: 2,
+				blockHash: "0x0",
+				chainId: 1,
+				srcAddress: userAddress1,
+				transactionHash: "0x0",
+				transactionIndex: 1,
+				logIndex: 1,
+			},
+		});
 
-    //Create a mock Transfer event from userAddress1 to userAddress2
-    const mockTransfer = ERC20.Transfer.createMockEvent({
-      from: userAddress1,
-      to: userAddress2,
-      value: 3n,
-    });
+		const mockDbAfterPositionOpened = TradePair.PositionOpened.processEvent({
+			event: mockPositionOpened,
+			mockDb: mockDbEmpty,
+		});
 
-    //Process the mockEvent
-    //Note: processEvent functions do not mutate the mockDb, they return a new
-    //mockDb with with modified state
-    const mockDbAfterTransfer = ERC20.Transfer.processEvent({
-      event: mockTransfer,
-      mockDb,
-    });
+		const position1 = mockDbAfterPositionOpened.entities.Position.get(123);
 
-    //Get the balance of userAddress1 after the transfer
-    const account1Balance =
-      mockDbAfterTransfer.entities.Account.get(userAddress1)?.balance;
-
-    //Assert the expected balance
-    assert.equal(
-      2n,
-      account1Balance,
-      "Should have subtracted transfer amount 3 from userAddress1 balance 5",
-    );
-
-    //Get the balance of userAddress2 after the transfer
-    const account2Balance =
-      mockDbAfterTransfer.entities.Account.get(userAddress2)?.balance;
-
-    //Assert the expected balance
-    assert.equal(
-      3n,
-      account2Balance,
-      "Should have added transfer amount 3 to userAddress2 balance 0",
-    );
-  });
+		assert.deepEqual(position1, mockPositionEntity, "Should be equal");
+	});
 });
