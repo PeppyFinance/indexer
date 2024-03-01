@@ -115,6 +115,18 @@
         "internalType": "uint256",
         "name": "value",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "borrowFeeAmount",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "fundingFeeAmount",
+        "type": "int256"
       }
     ],
     "name": "PositionClosed",
@@ -134,6 +146,18 @@
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "borrowFeeAmount",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "fundingFeeAmount",
+        "type": "int256"
       }
     ],
     "name": "PositionLiquidated",
@@ -168,9 +192,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "leverage",
-        "type": "uint256"
+        "internalType": "int256",
+        "name": "volume",
+        "type": "int256"
       },
       {
         "indexed": false,
