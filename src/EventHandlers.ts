@@ -24,36 +24,36 @@ TradePairContract_PositionOpened_handler(({ event, context }) => {
 		context.User.set(userObject);
 	}
 
-	const position = context.Position.get(event.params.id.toString());
+	// const position = context.Position.get(event.params.id.toString());
 
 	// event PositionOpened(
 	//     address indexed owner, uint256 id, int256 entryPrice, uint256 collateral, uint256 leverage, int8 direction
 	// );
 
-	if (position === undefined || position === null) {
-		const positionObject: PositionEntity = {
-			id: event.params.id.toString(),
-			owner: event.params.owner.toString(),
-			collateral: event.params.collateral,
-			entryVolume: event.params.volume,
-			entryTimestamp: BigInt(event.blockTimestamp),
-			direction: event.params.direction,
-			assets: event.params.assets,
-			borrowFeeIntegral: event.params.borrowFeeIntegral,
-			fundingFeeIntegral: event.params.fundingFeeIntegral,
-			entryPrice: event.params.volume / event.params.assets,
-			isOpen: true,
-			closePrice: null,
-			closeTimestamp: null,
-			closeValue: null,
-			pnl: null,
-			borrowFeeAmount: null,
-			fundingFeeAmount: null,
-			totalPnL: null,
-		};
+	// if (position === undefined || position === null) {
+	const positionObject: PositionEntity = {
+		id: event.params.id.toString(),
+		owner_id: event.params.owner.toString(),
+		collateral: event.params.collateral,
+		entryVolume: event.params.volume,
+		entryTimestamp: BigInt(event.blockTimestamp),
+		direction: event.params.direction,
+		assets: event.params.assets,
+		borrowFeeIntegral: event.params.borrowFeeIntegral,
+		fundingFeeIntegral: event.params.fundingFeeIntegral,
+		entryPrice: event.params.volume / event.params.assets,
+		isOpen: true,
+		closePrice: undefined,
+		closeTimestamp: undefined,
+		closeValue: undefined,
+		pnl: undefined,
+		borrowFeeAmount: undefined,
+		fundingFeeAmount: undefined,
+		totalPnL: undefined,
+	};
 
-		context.Position.set(positionObject);
-	}
+	context.Position.set(positionObject);
+	// }
 });
 
 TradePairContract_PositionClosed_loader(({ event, context }) => {
