@@ -11,7 +11,7 @@ describe("Transfers", () => {
 
 		const mockPositionEntity: PositionEntity = {
 			id: "123",
-			owner: userAddress1,
+			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,
 			assets: 500n,
@@ -21,13 +21,13 @@ describe("Transfers", () => {
 			fundingFeeIntegral: -200n,
 			direction: 1n,
 			isOpen: true,
-			closePrice: null,
-			closeTimestamp: null,
-			closeValue: null,
-			pnl: null,
-			borrowFeeAmount: null,
-			fundingFeeAmount: null,
-			totalPnL: null,
+			closePrice: undefined,
+			closeTimestamp: undefined,
+			closeValue: undefined,
+			pnl: undefined,
+			borrowFeeAmount: undefined,
+			fundingFeeAmount: undefined,
+			totalPnL: undefined,
 		};
 
 		const mockPositionOpened = TradePair.PositionOpened.createMockEvent({
@@ -73,7 +73,7 @@ describe("Transfers", () => {
 
 		const positionBefore: PositionEntity = {
 			id: "123",
-			owner: userAddress1,
+			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,
 			assets: 500n,
@@ -83,13 +83,13 @@ describe("Transfers", () => {
 			fundingFeeIntegral: -200n,
 			direction: 1n,
 			isOpen: true,
-			closePrice: null,
-			closeTimestamp: null,
-			closeValue: null,
-			pnl: null,
-			borrowFeeAmount: null,
-			fundingFeeAmount: null,
-			totalPnL: null,
+			closePrice: undefined,
+			closeTimestamp: undefined,
+			closeValue: undefined,
+			pnl: undefined,
+			borrowFeeAmount: undefined,
+			fundingFeeAmount: undefined,
+			totalPnL: undefined,
 		};
 
 		const updatedDb = mockDbEmpty.entities.Position.set(positionBefore);
@@ -122,7 +122,7 @@ describe("Transfers", () => {
 
 		const expectedPosition: PositionEntity = {
 			id: "123",
-			owner: userAddress1,
+			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,
 			assets: 500n,
