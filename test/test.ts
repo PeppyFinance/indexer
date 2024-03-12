@@ -55,6 +55,7 @@ describe("Transfers", () => {
 		const mockDbAfterPositionOpened = TradePair.PositionOpened.processEvent({
 			event: mockPositionOpened,
 			mockDb: mockDbEmpty,
+      chainId: 31337,
 		});
 
 		const position1 = mockDbAfterPositionOpened.entities.Position.get("123");
@@ -116,6 +117,7 @@ describe("Transfers", () => {
 		const mockDbAfterPositionClosed = TradePair.PositionClosed.processEvent({
 			event: mockPositionClosed,
 			mockDb: updatedDb,
+      chainId: 31337,
 		});
 
 		const position1 = mockDbAfterPositionClosed.entities.Position.get("123");
