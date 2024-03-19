@@ -11,6 +11,7 @@ describe("Transfers", () => {
 
 		const mockPositionEntity: PositionEntity = {
 			id: "123",
+			tradePair_id: "0x0",
 			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,
@@ -74,6 +75,7 @@ describe("Transfers", () => {
 
 		const positionBefore: PositionEntity = {
 			id: "123",
+			tradePair_id: "0x0",
 			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,
@@ -124,6 +126,7 @@ describe("Transfers", () => {
 
 		const expectedPosition: PositionEntity = {
 			id: "123",
+			tradePair_id: "0x0",
 			owner_id: userAddress1,
 			collateral: 100_000n,
 			entryVolume: 500_000n,

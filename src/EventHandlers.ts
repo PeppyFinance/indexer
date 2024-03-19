@@ -3,6 +3,8 @@ import {
 	TradePairContract_PositionOpened_handler,
 	TradePairContract_PositionClosed_loader,
 	TradePairContract_PositionClosed_handler,
+	TradePairContract_TradePairConstructed_loader,
+	TradePairContract_TradePairConstructed_handler,
 } from "../generated/src/Handlers.gen";
 
 import { PositionEntity, UserEntity } from "../generated/src/Types.gen";
@@ -33,6 +35,7 @@ TradePairContract_PositionOpened_handler(({ event, context }) => {
 	// if (position === undefined || position === null) {
 	const positionObject: PositionEntity = {
 		id: event.params.id.toString(),
+		tradePair_id: event.srcAddress,
 		owner_id: event.params.owner.toString(),
 		collateral: event.params.collateral,
 		entryVolume: event.params.volume,
@@ -82,3 +85,19 @@ TradePairContract_PositionClosed_handler(({ event, context }) => {
 		});
 	}
 });
+
+TradePairContract_TradePairConstructed_loader(({ event, context }) => {
+	context.TradePair.load(event.srcAddress);
+});
+
+TradePairContract_TradePairConstructed_handler(({ event, context }) => {
+	context.TradePair.set({
+		id: event.srcAddress,
+		collateralToken: event.params.collateralToken,
+		pyth: event.params.pyth,
+		assetDecimals: event.params.assetDecimals,
+		collateralDecimals: event.params.collateralDecimals,
+		pythId: event.params.pythId,
+		name: event.params.name,
+	});
+})
