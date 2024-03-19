@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "chai": "4.3.10",
-    "envio": "0.0.32-float-string-encode-fix",
+    "envio": "0.0.35",
     "ethers": "6.8.0"
   }
 }

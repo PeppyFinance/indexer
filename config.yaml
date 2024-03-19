@@ -1,13 +1,13 @@
-name: erc20indexer
-description: ERC-20 indexer
+name: PeppyIndexer
+description: PeppyIndexer
 networks:
-  - id: 31337
-    start_block: 0
+  - id: 1073
+    start_block: 678356
     rpc_config:
-      url: "http://127.0.0.1:8545"
+      url: "https://json-rpc.evm.testnet.shimmer.network"
     contracts:
       - name: TradePair
-        address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+        address: ["0xAf4580decb30B4Cb06dac700cF27CD1c9ce4b1FD","0x2DbD1b34b66CC372e34E1bDD00C65e7109E195E3","0x6Ef16cBbD8a8D0575C426bC3cb621e2cb509c764"]
         handler: src/EventHandlers.ts
         abi_file_path: "abi/TradePair.json"
         events:
@@ -19,3 +19,6 @@ networks:
             requiredEntities:
               - name: User
               - name: Position
+          - event: TradePairConstructed
+            requiredEntities:
+              - name: TradePair
