@@ -32,6 +32,8 @@ TradePairContract_PositionOpened_handler(({ event, context }) => {
 	//     address indexed owner, uint256 id, int256 entryPrice, uint256 collateral, uint256 leverage, int8 direction
 	// );
 
+
+	context.log.info("PositionOpened: assets: " + event.params.assets.toString() + ". entryPrice " + event.params.entryPrice.toString() ". volume: " + event.params.volume.toString()) 
 	// if (position === undefined || position === null) {
 	const positionObject: PositionEntity = {
 		id: event.params.id.toString(),
@@ -44,7 +46,7 @@ TradePairContract_PositionOpened_handler(({ event, context }) => {
 		assets: event.params.assets,
 		borrowFeeIntegral: event.params.borrowFeeIntegral,
 		fundingFeeIntegral: event.params.fundingFeeIntegral,
-		entryPrice: event.params.volume / event.params.assets,
+		entryPrice: event.params.entryPrice,
 		isOpen: true,
 		closePrice: undefined,
 		closeTimestamp: undefined,
