@@ -33,7 +33,7 @@ TradePairContract_PositionOpened_handler(({ event, context }) => {
 	// );
 
 
-	context.log.info("PositionOpened: assets: " + event.params.assets.toString() + ". entryPrice " + event.params.entryPrice.toString() ". volume: " + event.params.volume.toString()) 
+	context.log.info("PositionOpened: assets: " + event.params.assets.toString() + ". entryPrice " + event.params.entryPrice.toString() + ". volume: " + event.params.volume.toString()) 
 	// if (position === undefined || position === null) {
 	const positionObject: PositionEntity = {
 		id: event.params.id.toString(),
