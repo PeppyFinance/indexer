@@ -69,8 +69,7 @@ TradePairContract_PositionClosed_handler(({ event, context }) => {
 
 	if (position !== undefined && position !== null) {
 		const totalPnL =
-			BigInt(position.direction) *
-			(BigInt(event.params.value) - BigInt(position.entryVolume));
+			BigInt(event.params.value) - BigInt(position.collateral);
 		const pnl =
 			totalPnL + event.params.borrowFeeAmount + event.params.fundingFeeAmount;
 		context.Position.set({
